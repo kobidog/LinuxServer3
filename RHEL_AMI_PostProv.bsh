@@ -1,6 +1,6 @@
 #!/bin/bash
-# RHEL6 POST PROVISION SCRIPT
-# MICROSOFT CHANGES INCORPORATED FOR RHEL AZURE MARKETPLACE IMAGES
+# RHEL6 POST PROVISION SCRIPT - DAVE OWEN AUTOMATION  21-6-18
+# MICROSOFT CHANGES INCORPORATED FOR RHEL AZURE MARKETPLACE IMAGES - STEVE BLACK 19/9/18
 
 azurehostname=$1
 osversion=$2
@@ -14,12 +14,14 @@ export PATH=~/.local/bin:$PATH
 # export https_proxy=https://${proxy}:8080
 # export http_proxy=http://${proxy}:8080
 source ~/.bash_profile
-echo `env` > /tmp/OUTPUT
-echo "Param Generated Hostname: ${azurehostname}" > /tmp/OUTPUT
-echo "Param OS Version: ${osversion}" > /tmp/OUTPUT
-echo "Param Proxy Server: ${proxy}" > /tmp/OUTPUT
-echo "Param Satellite Server: ${satname}" > /tmp/OUTPUT
-echo "Param Satellite IP: ${satip}" > /tmp/OUTPUT
+echo $(date) > /tmp/OUTPUT
+echo >> /tmp/OUTPUT
+echo $(env) >> /tmp/OUTPUT
+echo "Param Hostname: ${azurehostname}" >> /tmp/OUTPUT
+echo "Param OS Version: ${osversion}" >> /tmp/OUTPUT
+echo "Param Proxy Server: ${proxy}" >> /tmp/OUTPUT
+echo "Param Satellite Server: ${satname}" >> /tmp/OUTPUT
+echo "Param Satellite IP: ${satip}" >> /tmp/OUTPUT
 
 #####################################################################################
 #RHEL 6 SECTION #########################################################################
