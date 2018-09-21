@@ -29,7 +29,7 @@ export PATH=~/.local/bin:$PATH
 source ~/.bash_profile
 echo $(date) >> /tmp/OUTPUT
 echo >> /tmp/OUTPUT
-echo $(env) >> /tmp/OUTPUT
+# echo $(env) >> /tmp/OUTPUT
 echo "Param Hostname: ${azurehostname}" >> /tmp/OUTPUT
 echo "Param OS Version: ${osversion}" >> /tmp/OUTPUT
 echo "Param Proxy Server: ${proxy}" >> /tmp/OUTPUT
@@ -41,7 +41,7 @@ echo "Param Satellite IP: ${satip}" >> /tmp/OUTPUT
 #####################################################################################
 
 echo ********OS Configuration Starting********* >> /tmp/OUTPUT
-
+echo $(date) >> /tmp/OUTPUT
 # echo ${satip} ${satname} puppet >> /etc/hosts
 # LINE REMOVED BY MICROSOFT
 # echo ${IPAddr} ${azurehostname}.s2.ms.unilever.com  ${azurehostname} >> /etc/hosts
@@ -136,6 +136,7 @@ env=Prod
 # echo ********Satellite Hostgroup Config********* >> /tmp/OUTPUT
 
 echo ********Qualys Agent deployment started********* >> /tmp/OUTPUT
+echo $(date) >> /tmp/OUTPUT
 rpm -ivh /tmp/qualys-cloud-agent.x86_64.rpm
 touch /etc/sysconfig/qualys-cloud-agent
 # echo https_proxy=https://${proxy}:8080/ >> /etc/sysconfig/qualys-cloud-agent
@@ -144,6 +145,7 @@ systemctl status qualys-cloud-agent
 echo ********Qualys Agent deployment completed********* >> /tmp/OUTPUT
 
 echo ********Networker Backup Agent deployment started********* >> /tmp/OUTPUT
+echo $(date) >> /tmp/OUTPUT
 #ENABLE AWS REPO - TEMPORARY WORKAROUND FOR LACK OF SATELLITE
 # sed -i -e "s/enabled=0/enabled=1/" /etc/yum.repos.d/redhat-rhui.repo
 yum -y install glibc.i686
@@ -158,6 +160,7 @@ service networker start
 echo ********Networker Backup Agent deployment completed********* >> /tmp/OUTPUT
 
 echo ********TrendMicro Agent deployment started********* >> /tmp/OUTPUT
+echo $(date) >> /tmp/OUTPUT
 rpm -i /tmp/Agent-Core-RedHat_EL7-10.3.0-127.x86_64.rpm
 sleep 15
 /opt/ds_agent/dsa_control -r
@@ -168,7 +171,7 @@ echo /etc/init.d/ds_agent status >> /tmp/OUTPUT
 echo ********TrendMicro Agent deployment completed******** >> /tmp/OUTPUT
 
 #UPDATE ALL - ONLY WORKS ONCE REGISTERED TO SATELLITE TO GET UNILEVER APPROVED UPDATES
-yum -y update
+# yum -y update
 
 echo ********Updating server facts file******** >> /tmp/OUTPUT
 cd /etc
@@ -177,3 +180,4 @@ cd facter/facts.d
 echo ueit_role=none  > server-facts.txt
 echo ueit_location=AZURE >> server-facts.txt
 echo ueit_env=${env} >> server-facts.txt
+echo $(date) >> /tmp/OUTPUT
